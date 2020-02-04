@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="profile" href="http://gmpg.org/xfn/11">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="main.css">
+    
+  
+</head>
+<body>
+<section class="hero is-medium is-primary is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h2 class="title">Vue.js Media Player Demo</h2>
+      <h3 class="subtitle">Moja amatorska twórczość</h3>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="columns is-multiline">
+    <div class="column is-6 is-offset-3">
+      <div class="content">
+        <h5>Player zainspirowany artykułem :</h5>
+        <a href="https://matthiashager.com/vue-js-media-player-tutorial">Vue.js Media Player Tutorial</a>
+        <p>dodałem funkcje pobierania, miłego słuchania, jeżeli już zechcesz tego posłuchać posłuchaj prosze do końca, niektóre kawałki mają rozwinięcie dopiero w środku pozdrawiam</p>
+        <p>kawałek 2 jest trochę przesterowany, przepraszam, najlepiej nie słuchac go za głośno,  uczyłem się ;)</p>
+        <p>kawałek 3 to bardzo stare czasy, gdy byłem nastolatkiem nagraliśmy go z przyjacielem na naszym pierwszym mikrofonie, Marcin Serecznie Cię pozdrawiam </p>
+        
+    </div>
+  </div>
+  <div class="column is-6 is-offset-3">
+    <div id="media-player">
+      <ul>
+        <li
+          v-for='(track, index) in tracks'
+          :class="{ 'is-active': index === activeTrack }"
+        >
+        
+          <a
+            @click='loadTrack(index, true)'
+            >
+            {{ track.title }} by {{ track.artist }}
+          </a>
+       
+          
+
+
+        </li>
+      </ul>
+      <div class="media-player__controls">
+        <a
+          class="media-player__play-pause-button"
+          @click="toggleStatus"
+        >
+          <i
+            class="far"
+            :class="{
+              'fa-play-circle': !isPlaying,
+              'fa-pause-circle': isPlaying
+            }"
+          ></i>
+        </a>
+        <div class="media-player__playback-container">
+          <div
+            :style="{ width: progress + '%' }"
+          >            
+          </div>
+          <span class='duration'>{{ prettyDuration }}</span>
+        </div>
+        <div class="media-player__volume-container">
+          <span>Regulacja głośności</span>
+          <br>
+          <input type="range" min='0' max='15' step='0.5' v-model='volume' />
+        </div>
+        <ul>
+            <li v-for='(track, index) in tracks'>
+                <a style="border: 1px solid white; text-align: center;" v-bind:href="track.url" download>Pobierz  {{  track.title  }}</a>
+   
+            </li>
+        </ul>
+      </div>   
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>&copy; 2018 <a href='https://matthiashager.com/'>Matthias Hager</a></p>
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src='main.js' type='text/javascript'></script>
+</body>
+</html>
